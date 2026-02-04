@@ -1,33 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import "./index.css";
 
 export default function App() {
-  const [isEntering, setIsEntering] = useState(false);
-  const [currentPlanet, setCurrentPlanet] = useState("");
-  const [redirectUrl, setRedirectUrl] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
-
-  const handleReadMore = (e, planet, url = "https://tracxn.com/") => {
+  const handleReadMore = (e, url = "https://tracxn.com/") => {
     e.stopPropagation();
-    
-    // Store planet info and URL
-    setCurrentPlanet(planet);
-    setRedirectUrl(url);
-    
-    // Start entry animation
-    setIsEntering(true);
-    
-    // Show loading state after 3.5 seconds
-    setTimeout(() => {
-      setIsLoading(true);
-    }, 3500);
-    
-    // Redirect after animation completes
-    setTimeout(() => {
-      window.open(url, "_blank");
-      setIsEntering(false);
-      setIsLoading(false);
-    }, 5000); // 5 seconds for the complete animation
+    window.open(url, "_blank");
   };
 
   useEffect(() => {
@@ -107,19 +84,6 @@ export default function App() {
     };
   }, []);
 
-  // Planet names mapping for display
-  const planetNames = {
-    mercury: "HOGC Enterprises",
-    venus: "Autotown",
-    earth: "Platform Architect",
-    mars: "Occasio",
-    jupiter: "Client Solutions",
-    saturn: "PropTech Services",
-    uranus: "GoExplore",
-    neptune: "Startup Lab",
-    pluto: "Connect"
-  };
-
   return (
     <>
       {/* FIXED LOGO */}
@@ -134,64 +98,6 @@ export default function App() {
           <span className="hogc-loader-percent">0%</span>
         </div>
       </div>
-
-      {/* PLANET ENTRY ANIMATION */}
-      {isEntering && (
-        <div className={`planet-entry-container active`}>
-          <div className="planet-entry">
-            <div className="planet-entry-stars" />
-            <div className={`planet-entry-sphere ${currentPlanet}`} />
-            <div className="planet-entry-text">
-              <h3>Approaching {currentPlanet.charAt(0).toUpperCase() + currentPlanet.slice(1)}</h3>
-              <h2>{planetNames[currentPlanet]}</h2>
-            </div>
-            <div className="planet-entry-depth" />
-            
-            {isLoading && (
-              <div className="planet-entry-loading">
-                <div className="planet-entry-loading-content">
-                  <h3>Establishing Connection</h3>
-                  <div className="planet-entry-loader">
-                    <div className="loading-dots">
-                      <div className="dot" />
-                      <div className="dot" />
-                      <div className="dot" />
-                    </div>
-                  </div>
-                  <p>Redirecting to destination...</p>
-                </div>
-              </div>
-            )}
-          </div>
-        </div>
-      )}
-
-      {/* Add loading dots animation */}
-      <style>{`
-        .loading-dots {
-          display: flex;
-          justify-content: center;
-          gap: 8px;
-          margin: 20px 0;
-        }
-        
-        .dot {
-          width: 10px;
-          height: 10px;
-          border-radius: 50%;
-          background: #fea082;
-          animation: dotPulse 1.5s infinite ease-in-out;
-        }
-        
-        .dot:nth-child(1) { animation-delay: 0s; }
-        .dot:nth-child(2) { animation-delay: 0.2s; }
-        .dot:nth-child(3) { animation-delay: 0.4s; }
-        
-        @keyframes dotPulse {
-          0%, 100% { transform: scale(0.8); opacity: 0.5; }
-          50% { transform: scale(1.2); opacity: 1; }
-        }
-      `}</style>
 
       {/* RADIO INPUTS */}
       <input className="planet1" type="radio" id="mercury" name="planet" defaultChecked />
@@ -231,7 +137,7 @@ export default function App() {
               <h1>HOGC Enterprises</h1>
               <p>Products Designed for Extreme Velocity.</p>
               <button 
-                onClick={(e) => handleReadMore(e, "mercury", "https://tracxn.com/")}
+                onClick={(e) => handleReadMore(e, "https://tracxn.com/")}
                 className="readmore-btn"
                 onMouseEnter={(e) => e.stopPropagation()}
                 onMouseDown={(e) => e.stopPropagation()}
@@ -251,7 +157,7 @@ export default function App() {
               <h1>Autotown</h1>
               <p>Designed for the Art of Driving.</p>
               <button 
-                onClick={(e) => handleReadMore(e, "venus", "https://tracxn.com/")}
+                onClick={(e) => handleReadMore(e, "https://tracxn.com/")}
                 className="readmore-btn"
                 onMouseEnter={(e) => e.stopPropagation()}
                 onMouseDown={(e) => e.stopPropagation()}
@@ -271,7 +177,7 @@ export default function App() {
               <h1>Platform Architect</h1>
               <p>Built for Real-World Applications.</p>
               <button 
-                onClick={(e) => handleReadMore(e, "earth", "https://tracxn.com/")}
+                onClick={(e) => handleReadMore(e, "https://tracxn.com/")}
                 className="readmore-btn"
                 onMouseEnter={(e) => e.stopPropagation()}
                 onMouseDown={(e) => e.stopPropagation()}
@@ -291,7 +197,7 @@ export default function App() {
               <h1>Occasio</h1>
               <p>Turn Moments into Movements.</p>
               <button 
-                onClick={(e) => handleReadMore(e, "mars", "https://tracxn.com/")}
+                onClick={(e) => handleReadMore(e, "https://tracxn.com/")}
                 className="readmore-btn"
                 onMouseEnter={(e) => e.stopPropagation()}
                 onMouseDown={(e) => e.stopPropagation()}
@@ -311,7 +217,7 @@ export default function App() {
               <h1>Client Solutions</h1>
               <p>Architects of Intelligent Growth.</p>
               <button 
-                onClick={(e) => handleReadMore(e, "jupiter", "https://tracxn.com/")}
+                onClick={(e) => handleReadMore(e, "https://tracxn.com/")}
                 className="readmore-btn"
                 onMouseEnter={(e) => e.stopPropagation()}
                 onMouseDown={(e) => e.stopPropagation()}
@@ -331,7 +237,7 @@ export default function App() {
               <h1>PropTech Services</h1>
               <p>Where Property Meets Precision.</p>
               <button 
-                onClick={(e) => handleReadMore(e, "saturn", "https://tracxn.com/")}
+                onClick={(e) => handleReadMore(e, "https://tracxn.com/")}
                 className="readmore-btn"
                 onMouseEnter={(e) => e.stopPropagation()}
                 onMouseDown={(e) => e.stopPropagation()}
@@ -351,7 +257,7 @@ export default function App() {
               <h1>GoExplore</h1>
               <p>Redefining How You Travel.</p>
               <button 
-                onClick={(e) => handleReadMore(e, "uranus", "https://tracxn.com/")}
+                onClick={(e) => handleReadMore(e, "https://tracxn.com/")}
                 className="readmore-btn"
                 onMouseEnter={(e) => e.stopPropagation()}
                 onMouseDown={(e) => e.stopPropagation()}
@@ -371,7 +277,7 @@ export default function App() {
               <h1>Startup Lab</h1>
               <p>Born from Vision.</p>
               <button 
-                onClick={(e) => handleReadMore(e, "neptune", "https://tracxn.com/")}
+                onClick={(e) => handleReadMore(e, "https://tracxn.com/")}
                 className="readmore-btn"
                 onMouseEnter={(e) => e.stopPropagation()}
                 onMouseDown={(e) => e.stopPropagation()}
@@ -391,7 +297,7 @@ export default function App() {
               <h1>Connect</h1>
               <p>Let's Connect.</p>
               <button 
-                onClick={(e) => handleReadMore(e, "pluto", "https://tracxn.com/")}
+                onClick={(e) => handleReadMore(e, "https://tracxn.com/")}
                 className="readmore-btn"
                 onMouseEnter={(e) => e.stopPropagation()}
                 onMouseDown={(e) => e.stopPropagation()}
